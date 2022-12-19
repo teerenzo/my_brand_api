@@ -1,10 +1,10 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const routes = require("./routers");
+import express from "express";
+import mongoose from "mongoose";
+const routes = require("./src/routers");
 const app = express();
-mongoose.set('strictQuery', true)
+// mongoose.set('strictQuery', true)
 mongoose
-  .connect("mongodb://localhost:27017/acmedb", { useNewUrlParser: true })
+  .connect("mongodb://127.0.0.1:27017/acmedb", { useNewUrlParser: true })
   .then(() => {
 
     app.use(express.json());

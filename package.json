@@ -4,13 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app.js",
+    "start": "nodemon --exec babel-node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/preset-env": "^7.14.7",
+    "@babel/core": "^7.14.6",
+    "@babel/node": "^7.14.7",
     "bcryptjs": "^2.4.3",
     "express": "^4.18.2",
     "joi": "^17.7.0",

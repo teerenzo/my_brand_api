@@ -1,7 +1,7 @@
-const express = require("express");
-const { sendMessage,getAllMessages,deleteMessage} = require("../controllers/messageController")
+import express from "express";
+import { sendMessage,getAllMessages,deleteMessage} from "../controllers/messageController"
 const router = express.Router();
-const { protect } = require("../middleware/authoMiddlewares");
+import { protect } from "../middleware/authoMiddlewares";
 router.get("/messages",protect,getAllMessages)
 router.post("/sendMessage",sendMessage)
 router.delete("/delete/:id",protect,deleteMessage)

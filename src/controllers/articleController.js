@@ -1,5 +1,5 @@
-const express = require('express')
-const Article = require("../models/article")
+
+import Article from "../models/article"
 
 
 exports.getAllArticles = function(req, res) {
