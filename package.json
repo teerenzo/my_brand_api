@@ -11,14 +11,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@babel/preset-env": "^7.14.7",
     "@babel/core": "^7.14.6",
     "@babel/node": "^7.14.7",
+    "@babel/preset-env": "^7.14.7",
     "bcryptjs": "^2.4.3",
     "express": "^4.18.2",
     "joi": "^17.7.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.8.0",
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0"
   }
 }

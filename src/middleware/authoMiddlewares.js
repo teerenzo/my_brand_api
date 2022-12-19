@@ -1,5 +1,5 @@
-const jwt = require('jsonwebtoken')
-const User = require('../models/userModel')
+import jwt from 'jsonwebtoken'
+import User from '../models/userModel'
 const tokenSecret = "my-token-secret"
 
 exports.protect = (req, res, next) => {
