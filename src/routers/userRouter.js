@@ -1,5 +1,5 @@
-const express = require('express')
-const {createNewUser,LoginUser,getUserInfo} = require('../controllers/userController')
+import express from 'express'
+import {createNewUser,LoginUser,getUserInfo} from '../controllers/userController'
 const router = express.Router()
 
 router.post('/login',LoginUser)

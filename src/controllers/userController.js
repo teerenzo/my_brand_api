@@ -1,8 +1,8 @@
-const { createUserSchema, loginUserSchema } = require("../helpers/validation");
-const User=require('../models/userModel');
-const jwt=require('jsonwebtoken')
-const bcrypt=require('bcryptjs');
-const { json } = require("express");
+import { createUserSchema, loginUserSchema } from "../helpers/validation";
+import User from '../models/userModel';
+import  jwt from 'jsonwebtoken'
+import bcrypt from'bcryptjs';
+
 
 const createNewUser= async(req,res)=>{
     try {
