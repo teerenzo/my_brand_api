@@ -1,9 +1,8 @@
 
 import Article from "../models/article"
 const express = require('express')
-const { articleSchema,updateArticleSchema } = require("../helpers/validation");
-const Article = require("../models/article")
-const User = require("../models/userModel")
+import { articleSchema,updateArticleSchema } from "../helpers/validation";
+import User from "../models/userModel"
 
 
 var today = new Date();

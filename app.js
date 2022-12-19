@@ -1,6 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
-const routes = require("./src/routers");
+import routes from "./src/routers";
 const app = express();
 // mongoose.set('strictQuery', true)
 mongoose
