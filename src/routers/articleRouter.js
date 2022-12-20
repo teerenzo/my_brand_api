@@ -5,14 +5,14 @@ import {getAllArticles,createNewArticle,commentingOnArticle,likeArticle,deleteAr
 
 const router = express.Router();
 import { protect } from "../middleware/authoMiddlewares";
-router.get("/",protect,getAllArticles)
+router.get("/",getAllArticles)
 
 router.post("/add",protect,createNewArticle)
 
-router.post("/comment",protect,commentingOnArticle)
-router.post("/like",protect,likeArticle)
-router.delete("/delete/:id",protect,deleteArticle)
-router.put("/update/:id",protect,updateArticle)
+router.post("/:article_id/comment",protect,commentingOnArticle)
+router.post("/:article_id/like",protect,likeArticle)
+router.delete("/:id",protect,deleteArticle)
+router.put("/:id",protect,updateArticle)
 
 
 

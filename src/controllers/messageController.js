@@ -1,7 +1,7 @@
 import  messageSchema from "../helpers/validation"
 import Message from "../models/message";
 
-const sendMessage = async (req,res)=>{
+const sendMessage = async (req,res)=>{ 
   try {
     const valationResult = await messageSchema.validateAsync(req.body);
     const message=new Message({

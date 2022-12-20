@@ -1,8 +1,9 @@
 
 import Article from "../models/article"
-const express = require('express')
+// const express = require('express')
 import { articleSchema,updateArticleSchema } from "../helpers/validation";
 import User from "../models/userModel"
+import imageUpload from '../helpers/photoupload'
 
 
 var today = new Date();
@@ -12,7 +13,7 @@ var yyyy = today.getFullYear();
 
     today = dd + "/" + mm + "/" + yyyy;
 
-exports.getAllArticles = function(req, res) {
+exports.getAllArticles = (req, res) => {
     Article.find()
     .then(result=>{
         res.json(result)
@@ -20,28 +21,32 @@ exports.getAllArticles = function(req, res) {
 
 };
 
-exports.createNewArticle = async function (req, res)  {
+exports.createNewArticle = async (req, res)  =>{
     // console.log(req.files)
     try {
         const valationResult = await articleSchema.validateAsync(req.body);
         User.findOne({
             _id:req.user
-        }).then((result)=>{
-
+        }).then(async (result)=>{
+        console.log("get")
      
         if(result.role.toString()=='admin')
         {
-                const article= new Article({
-                    title:valationResult.title,
-                    content:valationResult.content,
-                    postedDate: today,
-                    imageUrl: '',
-                })
-           
-            article.save().then(result=>{
-                res.json(result)
+            const article= new Article({
+                title:valationResult.title,
+                content:valationResult.content,
+                postedDate: today,
+                imageUrl: '',
             })
-            .catch(error=>console.log(error))
+            if(req.files) {
+            const image = await imageUpload(req);
+            article.imageUrl = image.url
+            }
+        article.save()
+        .then(result=>{
+            res.json(result)
+        })
+        .catch(error=>console.log(error))
         }
         else
         {
@@ -125,7 +130,8 @@ exports.deleteArticle=(req,res)=>{
 
 
 exports.commentingOnArticle=(req,res)=>{
-    const {article_id,comment}=req.body
+    const {article_id}=req.params
+    const {comment}=req.body
  
     User.findOne({
         _id:req.user
@@ -152,7 +158,7 @@ exports.commentingOnArticle=(req,res)=>{
 }
 
 exports.likeArticle=(req,res)=>{
-    const {article_id}=req.body
+    const {article_id}=req.params
     const user_id=req.user
 
     const newLike={

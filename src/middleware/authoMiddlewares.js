@@ -10,6 +10,7 @@ exports.protect = (req, res, next) => {
             if (err) res.status(500).json({error: 'failed to authenticate token'})
             req.user = value.id
             next()
+        
         })
     }
 }
