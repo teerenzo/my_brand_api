@@ -22,11 +22,11 @@ exports.getAllArticles = (req, res) => {
 };
 
 exports.createNewArticle = async (req, res)  =>{
-    console.log(req.files)
+    // console.log(req.s)
     try {
         const valationResult = await articleSchema.validateAsync(req.body);
         User.findOne({
-            _id:req.user
+            _id:req.user.id
         }).then(async (result)=>{
         console.log("get")
      
@@ -69,7 +69,7 @@ exports.updateArticle=async (req,res)=>{
         const valationResult = await updateArticleSchema.validateAsync({article_id:id,title,content});
      
         User.findOne({
-            _id:req.user
+            _id:req.user.id
         }).then((user)=>{
        if(user.role.toString()=='admin')
         {
@@ -104,7 +104,7 @@ res.json(err)
 exports.deleteArticle=(req,res)=>{
     const {id}=req.params
     User.findOne({
-        _id:req.user
+        _id:req.user.id
     }).then((user)=>{
 
   
@@ -134,7 +134,7 @@ exports.commentingOnArticle=(req,res)=>{
     const {comment}=req.body
  
     User.findOne({
-        _id:req.user
+        _id:req.user.id
     }).then((user)=>{
     const newComment={
         user_id:user._id,
@@ -159,7 +159,7 @@ exports.commentingOnArticle=(req,res)=>{
 
 exports.likeArticle=(req,res)=>{
     const {article_id}=req.params
-    const user_id=req.user
+    const user_id=req.user.id
 
     const newLike={
         user_id,
