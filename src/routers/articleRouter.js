@@ -1,11 +1,12 @@
 import express from "express";
 
 
-import {getAllArticles,createNewArticle,commentingOnArticle,likeArticle,deleteArticle,updateArticle} from "../controllers/articleController"
+import {getAllArticles,createNewArticle,commentingOnArticle,likeArticle,deleteArticle,updateArticle,getOneArticle} from "../controllers/articleController"
 
 const router = express.Router();
 import { protect } from "../middleware/authoMiddlewares";
 router.get("/",getAllArticles)
+router.get("/:id",getOneArticle)
 
 router.post("/add",protect,createNewArticle)
 

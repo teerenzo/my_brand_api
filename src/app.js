@@ -1,8 +1,10 @@
 import express from "express";
 import mongoose from "mongoose";
 import routes from "./routers";
-import passports from './middleware/passport';
+import cors from 'cors'
 const app = express();
+const { json } = require('express')
+const fileUploader=require('express-fileupload')
 import passport from "passport";
 mongoose.set('strictQuery', true)
 mongoose
@@ -11,6 +13,9 @@ mongoose
 
     app.use(express.json());
     app.use("/api", routes);
+    app.use(cors());
+    app.use(json())
+    app.use(fileUploader({useTempFiles: true}))
   
   // passports
     app.listen(5000, () => {

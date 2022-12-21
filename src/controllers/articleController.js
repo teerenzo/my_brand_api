@@ -3,7 +3,7 @@ import Article from "../models/article"
 // const express = require('express')
 import { articleSchema,updateArticleSchema } from "../helpers/validation";
 import User from "../models/userModel"
-import imageUpload from '../helpers/photoupload'
+import {articleImage} from '../helpers/photoupload'
 
 
 var today = new Date();
@@ -22,7 +22,7 @@ exports.getAllArticles = (req, res) => {
 };
 
 exports.createNewArticle = async (req, res)  =>{
-    // console.log(req.files)
+    console.log(req.files)
     try {
         const valationResult = await articleSchema.validateAsync(req.body);
         User.findOne({
@@ -39,7 +39,7 @@ exports.createNewArticle = async (req, res)  =>{
                 imageUrl: '',
             })
             if(req.files) {
-            const image = await imageUpload(req);
+            const image = await articleImage(req);
             article.imageUrl = image.url
             }
         article.save()
