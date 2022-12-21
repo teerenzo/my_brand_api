@@ -1,4 +1,4 @@
-const { ref } = require('joi')
+
 import joi from 'joi';
 
 const articleSchema=joi.object({

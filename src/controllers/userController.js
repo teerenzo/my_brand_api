@@ -18,7 +18,7 @@ const createNewUser= async(req,res)=>{
             username:valationResult.username,
             email:valationResult.email,
             password:hashedPassword,
-            role:'admin'
+            role:'vistor'
         })
         user.save()
         .then(user=>res.status(201).json({"success":true,
@@ -49,7 +49,7 @@ const LoginUser=async (req,res)=>{
             username:user.username,
             email:user.email,
             role:user.role,
-            token:generateToken(user._id)
+            token:generateToken(user)
         }})
        }
        else res.json({"success":false,message:"Invalid credation"}).status(400)
