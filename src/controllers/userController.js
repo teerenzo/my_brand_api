@@ -2,7 +2,6 @@ import { createUserSchema, loginUserSchema } from "../helpers/validation";
 import User from '../models/userModel';
 import  jwt from 'jsonwebtoken'
 import bcrypt from'bcryptjs';
-import passport from "passport";
 
 
 const createNewUser= async(req,res)=>{
