@@ -17,7 +17,7 @@ const createNewUser= async(req,res)=>{
             username:valationResult.username,
             email:valationResult.email,
             password:hashedPassword,
-            role:'vistor'
+            role:'admin'
         })
         user.save()
         .then(user=>res.status(201).json({"success":true,

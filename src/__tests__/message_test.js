@@ -43,8 +43,11 @@ describe('Testing message routes',()=>{
     it('should get all messages',async()=>{
        const adminSignin=await supertest(baseURL).post('account/login').send(admin)
         const token = `Bearer ${adminSignin.body.user.token}`;
-        const res= await supertest(baseURL).get('message/messages/').set('Authorization', token)
+  
+        const res= await supertest(baseURL).get('message/').set('Authorization', token)
+        console.log(res)
         expect(res.status).toEqual(200)
+
    
     })
 
