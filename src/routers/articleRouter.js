@@ -13,7 +13,7 @@ router.post("/add",protect,createNewArticle)
 router.post("/:article_id/comment",protect,commentingOnArticle)
 router.post("/:article_id/like",protect,likeArticle)
 router.delete("/:id",protect,deleteArticle)
-router.put("/:id",protect,updateArticle)
+router.put("/:id/update",protect,updateArticle)
 
 
 
