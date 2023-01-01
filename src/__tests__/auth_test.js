@@ -35,11 +35,9 @@ describe('Testing Auth routes', () => {
   console.log(baseURL)
 
   beforeAll(async () => {
-    // jest.setTimeout(10000);
 await User.deleteMany();
 });
 	beforeEach(async () => {
-    // jest.setTimeout(10000);
 		await User.deleteMany({
 			where: { email: { $not: ['admin@gmail.com'] } },
 		});
