@@ -13,15 +13,6 @@ dotenv.config();
 
 chai.expect();
 chai.use(chaiHttp);
-
-mongoose.connect ( 'mongodb+srv://tee:QIRn5zlICWEVb6Xj@test.nfjw6px.mongodb.net/?retryWrites=true&w=majority', {
-    useNewUrlParser: true
-})
-mongoose.connection.on( 'error', () => {
-  throw new Error(`unable to connect to database: `)
-})
-mongoose.set('strictQuery', true);
-
 const tester = {
   username: 'James',
 	email: 'admin@gmail.com',
