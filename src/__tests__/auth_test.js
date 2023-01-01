@@ -31,6 +31,9 @@ const tester = {
 };
 
 describe('Testing Auth routes', () => {
+   
+  console.log(baseURL)
+
   beforeAll(async () => {
     // jest.setTimeout(10000);
 await User.deleteMany();
