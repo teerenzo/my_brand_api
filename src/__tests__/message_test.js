@@ -13,7 +13,11 @@ const baseURL = process.env.BASE_URL
 
 
 
-mongoose.connect ( process.env.MONGO_TEST_URL, {
+mongoose.connect (process.env.NODE_ENV === 'production'
+? process.env.MONGO_PROD_URL
+: process.env.NODE_ENV === 'test'
+? process.env.MONGO_TEST_URL
+: process.env.MONGO_DEV_URL, {
     useNewUrlParser: true
 })
 mongoose.connection.on( 'error', () => {
