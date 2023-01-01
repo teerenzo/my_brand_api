@@ -5,10 +5,15 @@ mongoose.Promise = global.Promise
 import supertest from 'supertest'
 import Message from "../models/message";
 const cloudinary=require('cloudinary').v2;
+import dotenv from 'dotenv';
 
-const baseURL = "http://localhost:5000/api/"
+dotenv.config();
 
-mongoose.connect ( 'mongodb://localhost/acmedb', {
+const baseURL = process.env.BASE_URL
+
+
+
+mongoose.connect ( process.env.MONGO_TEST_URL, {
     useNewUrlParser: true
 })
 mongoose.connection.on( 'error', () => {
@@ -45,7 +50,7 @@ describe('Testing message routes',()=>{
         const token = `Bearer ${adminSignin.body.user.token}`;
   
         const res= await supertest(baseURL).get('message/').set('Authorization', token)
-        console.log(res)
+    
         expect(res.status).toEqual(200)
 
    

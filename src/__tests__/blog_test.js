@@ -1,12 +1,22 @@
 import mongoose from 'mongoose' 
 mongoose.Promise = global.Promise
 import supertest from 'supertest'
-const cloudinary=require('cloudinary').v2;
-
-const baseURL = "http://localhost:5000/api/"
-import Article from '../models/article'
+import path from 'path'
 import Sinon from 'sinon'
-mongoose.connect ( 'mongodb://localhost/acmedb', {
+
+import Article from '../models/article'
+
+import cloudinary from '../config/cloudinary';
+
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const baseURL = process.env.BASE_URL
+
+
+
+mongoose.connect ( process.env.MONGO_TEST_URL, {
     useNewUrlParser: true
 })
 mongoose.connection.on( 'error', () => {
@@ -14,11 +24,9 @@ mongoose.connection.on( 'error', () => {
 })
 mongoose.set('strictQuery', true);
 
-
 const testingData={
     title:'testing article title',
     content:'testing article content',
-    image:''
 }
 const testingDataUpdate={
     title:'testing article title update',
@@ -34,14 +42,25 @@ const admin={
 
 
 describe('Testing Blog routes', () => {
-
     const sandbox = Sinon.createSandbox();
+    beforeAll(async () => {
+        sandbox.stub(cloudinary, 'upload').resolves({
+            url: 'wazaa',
+          });
+		await Article.deleteMany();
+	});
+
+    afterAll(async () => {
+		await Article.deleteMany();
+	});
+
     it('should create new blog article.',async()=>{
+
         const adminSignin=await supertest(baseURL).post('account/login').send(admin)
         const token = `Bearer ${adminSignin.body.user.token}`;
-      
-        const res=await supertest(baseURL).post('/articles/add').send(testingData).set('Authorization', token)
-   
+  
+        const res=await supertest(baseURL).post('/articles/add').field('title',testingData.title).field('content',testingData.content).attach("photo",path.resolve(__dirname,'./mock/tee.jpg')).set('Authorization', token)
+        console.log(token);
         expect(res.status).toEqual(200);
     })
     it('should get all blog articles.',async()=>{
