@@ -2,7 +2,6 @@ import { createUserSchema, loginUserSchema } from "../helpers/validation";
 import User from '../models/userModel';
 import  jwt from 'jsonwebtoken'
 import bcrypt from'bcryptjs';
-import passport from "passport";
 
 
 const createNewUser= async(req,res)=>{
@@ -18,7 +17,7 @@ const createNewUser= async(req,res)=>{
             username:valationResult.username,
             email:valationResult.email,
             password:hashedPassword,
-            role:'vistor'
+            role:'admin'
         })
         user.save()
         .then(user=>res.status(201).json({"success":true,

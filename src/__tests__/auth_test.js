@@ -1,16 +1,46 @@
 import mongoose from 'mongoose' 
 mongoose.Promise = global.Promise
 import supertest from 'supertest'
-const baseURL = "http://localhost:5000/api/"
 import User from '../models/userModel'
-mongoose.connect ( 'mongodb://localhost/acmedb', {
+
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const baseURL = process.env.BASE_URL
+
+
+
+mongoose.connect ( process.env.NODE_ENV === 'production'
+? process.env.MONGO_PROD_URL
+: process.env.NODE_ENV === 'test'
+? process.env.MONGO_TEST_URL
+: process.env.MONGO_DEV_URL, {
     useNewUrlParser: true
 })
 mongoose.connection.on( 'error', () => {
   throw new Error(`unable to connect to database: `)
 })
+mongoose.set('strictQuery', true);
 
-it("should throw an error if the password value is empty", async () => {
+const tester = {
+  username: 'James',
+	email: 'admin@gmail.com',
+	password: '123456'
+
+};
+
+describe('Testing Auth routes', () => {
+  beforeAll(async () => {
+  
+await User.deleteMany();
+});
+	beforeEach(async () => {
+		await User.deleteMany({
+			where: { email: { $not: ['admin@gmail.com'] } },
+		});
+	});
+  it("should throw an error if the password value is empty", async () => {
     try {
      
       await new User({
@@ -23,29 +53,27 @@ it("should throw an error if the password value is empty", async () => {
     }
   })
 
-  it("should create account",async()=>{
-    
-      const create = {
-        username: "teerenzo",
-        email: "renzaho3000@gmail.com",
-        password: "123456"
-      }
-  const result = await supertest(baseURL).post('account/signUp').send(create)
-  // console.log(result.body.success);Í
-      expect(result.body.success).toEqual(true)
-
-  
-
-
-  })
-
-
-
-afterAll( async ()=>{
+  it("should throw an error if the email value is empty", async () => {
     try {
-        await mongoose.connection.close()
-      } catch (err) {
-        console.log(err)
-      }
-    
-})
+     
+      await new User({
+        username: "sam",
+        email: "",
+        password: "123456"
+      }).save()
+    } catch (err) {
+      expect(err.errors.email.message).toEqual("Please add a email")
+    }
+  })
+	it('should register a user.', async () => {
+		const res = await supertest(baseURL).post('account/signUp').send((tester));
+    console.log(res.body)
+		expect(res.status).toEqual(201);
+	});
+	it('should login user.', async () => {
+        const user = await supertest(baseURL).post('account/signUp').send(tester);
+		const res = await supertest(baseURL).post('account/login').send({email:user.email,password:user.password});
+		expect(res.status).toEqual(200);
+	});
+});
+

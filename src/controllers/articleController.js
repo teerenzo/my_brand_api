@@ -3,7 +3,7 @@ import Article from "../models/article"
 // const express = require('express')
 import { articleSchema,updateArticleSchema } from "../helpers/validation";
 import User from "../models/userModel"
-import {articleImage} from '../helpers/photoupload'
+import imageUpload from '../helpers/photoupload'
 
 
 var today = new Date();
@@ -22,7 +22,7 @@ exports.getAllArticles = (req, res) => {
 };
 
 exports.createNewArticle = async (req, res)  =>{
-    // console.log(req.s)
+    // console.log(req.files)
     try {
         const valationResult = await articleSchema.validateAsync(req.body);
         User.findOne({
@@ -39,21 +39,21 @@ exports.createNewArticle = async (req, res)  =>{
                 imageUrl: '',
             })
             if(req.files) {
-            const image = await articleImage(req);
+            const image = await imageUpload(req);
             article.imageUrl = image.url
             }
         article.save()
         .then(result=>{
             res.json(result)
         })
-        .catch(error=>console.log(error))
+        .catch(error=>console.log(error+"hello11233"))
         }
         else
         {
             res.json({message:'User Not Authorized'}).status(401)
         }
     }).catch((er)=>{
-        res.status(500).json(er)
+        res.status(500).json(er+"heyyyoo")
     })
     }
     catch (err) {
