@@ -37,6 +37,9 @@
     "mongodbMemoryServer": {
       "version": "4.2.3"
     }
+  },
+  "jest": {
+    "testTimeout": 15000
   }
 
 }
