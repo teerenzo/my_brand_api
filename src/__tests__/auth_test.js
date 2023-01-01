@@ -1,8 +1,6 @@
-import mongoose from 'mongoose' 
 import chai from 'chai';
 import { expect } from 'chai';
 import chaiHttp from 'chai-http';
-mongoose.Promise = global.Promise
 import User from '../models/userModel'
 
 const app =require('../app');
