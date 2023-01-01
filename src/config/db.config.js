@@ -6,8 +6,9 @@ dotenv.config();
 // const { MONGO_URL } = process.env;
 
 exports.dbConnect = () => {
+
   mongoose
-    .connect("mongodb+srv://tee:QIRn5zlICWEVb6Xj@test.nfjw6px.mongodb.net/?retryWrites=true&w=majority", {
+    .connect("mongodb+srv://tee:QIRn5zlICWEVb6Xj@test.nfjw6px.mongodb.net/test", {
 
       useNewUrlParser: true,
     })
