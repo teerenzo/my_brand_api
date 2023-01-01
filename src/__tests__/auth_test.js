@@ -1,15 +1,15 @@
-import mongoose from 'mongoose' 
-mongoose.Promise = global.Promise
 import supertest from 'supertest'
-const baseURL = "http://localhost:5000/api/"
 import User from '../models/userModel'
-mongoose.connect ( 'mongodb://localhost/acmedb', {
-    useNewUrlParser: true
-})
-mongoose.connection.on( 'error', () => {
-  throw new Error(`unable to connect to database: `)
-})
-mongoose.set('strictQuery', true);
+
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const baseURL = process.env.BASE_URL
+
+
+
+
 const tester = {
   username: 'James',
 	email: 'admin@gmail.com',
@@ -24,6 +24,7 @@ describe('Testing Auth routes', () => {
 		});
 	});
   it("should throw an error if the password value is empty", async () => {
+    
     try {
      
       await new User({
@@ -51,13 +52,11 @@ describe('Testing Auth routes', () => {
 	it('should register a user.', async () => {
 		const res = await supertest(baseURL).post('account/signUp').send((tester));
 		expect(res.status).toEqual(201);
-		// expect(res.body).toEqual('object');
 	});
 	it('should login user.', async () => {
         const user = await supertest(baseURL).post('account/signUp').send(tester);
 		const res = await supertest(baseURL).post('account/login').send({email:user.email,password:user.password});
 		expect(res.status).toEqual(200);
-		// expect(res.body).toBe('object');
 	});
 });
 

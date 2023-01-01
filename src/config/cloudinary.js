@@ -1,4 +1,4 @@
-const cloudinary=require('cloudinary').v2;
+import {v2 as cloudinary} from 'cloudinary';
 
 cloudinary.config({
     cloud_name: 'dizlhwbtt',
@@ -6,5 +6,4 @@ cloudinary.config({
     api_secret: 'ouG5PbIEoXbK0NUt4ilSL3zWz10'
 });
 
-
-module.exports = cloudinary.uploader;
+export default cloudinary.uploader;
