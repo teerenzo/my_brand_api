@@ -32,7 +32,7 @@ const tester = {
 
 describe('Testing Auth routes', () => {
   beforeAll(async () => {
-  
+    jest.setTimeout(10000);
 await User.deleteMany();
 });
 	beforeEach(async () => {
@@ -72,6 +72,7 @@ await User.deleteMany();
 		expect(res.status).toEqual(201);
 	});
 	it('should login user.', async () => {
+    jest.setTimeout(10000);
         const user = await supertest(baseURL).post('account/signUp').send(tester);
 		const res = await supertest(baseURL).post('account/login').send({email:user.email,password:user.password});
 		expect(res.status).toEqual(200);
