@@ -32,5 +32,11 @@
     "save-dev": "0.0.1-security",
     "sinon": "^15.0.1",
     "supertest": "^6.3.3"
+  },
+  "config": {
+    "mongodbMemoryServer": {
+      "version": "4.2.3"
+    }
   }
+
 }
