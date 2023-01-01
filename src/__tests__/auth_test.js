@@ -7,7 +7,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const baseURL = process.env.BASE_URL
+const baseURL = "http://localhost:5000/api/"
 
 
 
