@@ -12,11 +12,12 @@ app.use(cors());
 app.use(json())
 app.use(fileUploader({ useTempFiles: true }))
 
-dbConnect()
+
 
 app.use("/api", routes);
 
-app.listen(PORT, () => {
+app.listen(PORT, async ()  => {await dbConnect()
+
   console.log("Server has started!");
 });
 

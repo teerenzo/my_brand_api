@@ -6,9 +6,12 @@ dotenv.config();
 // const { MONGO_URL } = process.env;
 
 exports.dbConnect = () => {
-
   mongoose
-    .connect("mongodb+srv://tee:QIRn5zlICWEVb6Xj@test.nfjw6px.mongodb.net/test", {
+    .connect(process.env.NODE_ENV === 'production'
+    ? process.env.MONGO_PROD_URL
+    : process.env.NODE_ENV === 'test'
+    ? process.env.MONGO_TEST_URL
+    : process.env.MONGO_DEV_URL, {
 
       useNewUrlParser: true,
     })
