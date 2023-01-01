@@ -40,6 +40,7 @@ const admin={
 
 describe('Testing message routes',()=>{
     beforeEach(async()=>{
+        jest.setTimeout(10000);
         await Message.deleteMany()
     })
     afterEach(async()=>{

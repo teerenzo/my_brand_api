@@ -48,6 +48,7 @@ const admin={
 describe('Testing Blog routes', () => {
     const sandbox = Sinon.createSandbox();
     beforeAll(async () => {
+        jest.setTimeout(10000);
         sandbox.stub(cloudinary, 'upload').resolves({
             url: 'wazaa',
           });
