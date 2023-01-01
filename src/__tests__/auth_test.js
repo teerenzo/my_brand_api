@@ -34,9 +34,9 @@ describe('Testing Auth routes', () => {
    
   console.log(baseURL)
 
-  beforeAll(async () => {
-await User.deleteMany();
-});
+//   beforeAll(async () => {
+// await User.deleteMany();
+// });
 	beforeEach(async () => {
 		await User.deleteMany({
 			where: { email: { $not: ['admin@gmail.com'] } },
