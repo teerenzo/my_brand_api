@@ -7,7 +7,7 @@ dotenv.config();
 
 exports.dbConnect = () => {
   mongoose
-    .connect("mongodb+srv://tee:QIRn5zlICWEVb6Xj@test.nfjw6px.mongodb.net/test", {
+    .connect("mongodb+srv://alain:kabebe22@cluster0.ax3p6.mongodb.net/my_brand_test?retryWrites=true&w=majority", {
       useNewUrlParser: true, useUnifiedTopology: true
     })
     .then(() => {console.log('Connected to DB')});
