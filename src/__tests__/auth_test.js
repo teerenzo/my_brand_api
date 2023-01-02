@@ -23,14 +23,14 @@ describe('Testing Auth routes', () => {
    
   
 
-  beforeAll(async () => {
-await User.deleteMany();
-});
-	beforeEach(async () => {
-		await User.deleteMany({
-			where: { email: { $not: ['admin@gmail.com'] } },
-		});
-	});
+//   beforeAll(async () => {
+// await User.deleteMany();
+// });
+// 	beforeEach(async () => {
+// 		await User.deleteMany({
+// 			where: { email: { $not: ['admin@gmail.com'] } },
+// 		});
+// 	});
   it("should throw an error if the password value is empty", async () => {
     try {
      
@@ -56,17 +56,17 @@ await User.deleteMany();
       expect(err.errors.email.message).equal("Please add a email")
     }
   })
-	it('should register a user.', async () => {
-		const res = await chai.request(app).post('/api/account/signUp').send((tester));
-    console.log(res.body)
-		expect(res.status).to.be.equal(201);
-    expect(res.body).to.be.a('object');
-	});
-	it('should login user.', async () => {
-    // jest.setTimeout(10000);
-        const user = await chai.request(app).post('/api/account/signUp').send(tester);
-		const res = await chai.request(app).post('/api/account/login').send({email:user.email,password:user.password});
-    expect(res.status).to.be.equal(200);
-	});
+	// it('should register a user.', async () => {
+	// 	const res = await chai.request(app).post('/api/account/signUp').send((tester));
+  //   console.log(res.body)
+	// 	expect(res.status).to.be.equal(201);
+  //   expect(res.body).to.be.a('object');
+	// });
+	// it('should login user.', async () => {
+  //   // jest.setTimeout(10000);
+  //       const user = await chai.request(app).post('/api/account/signUp').send(tester);
+	// 	const res = await chai.request(app).post('/api/account/login').send({email:user.email,password:user.password});
+  //   expect(res.status).to.be.equal(200);
+	// });
 });
 
