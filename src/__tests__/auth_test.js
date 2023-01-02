@@ -18,7 +18,7 @@ const tester = {
 	password: '123456'
 
 };
-jest.setTimeout(30000)
+// jest.setTimeout(30000)
 
 describe('Testing Auth routes', () => {
 
