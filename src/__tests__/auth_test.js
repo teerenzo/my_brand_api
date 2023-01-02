@@ -18,19 +18,18 @@ const tester = {
 	password: '123456'
 
 };
+// jest.setTimeout(30000)
 
 describe('Testing Auth routes', () => {
-   
-  
 
-//   beforeAll(async () => {
-// await User.deleteMany();
-// });
-// 	beforeEach(async () => {
-// 		await User.deleteMany({
-// 			where: { email: { $not: ['admin@gmail.com'] } },
-// 		});
-// 	});
+  beforeAll(async () => {
+await User.deleteMany();
+});
+	beforeEach(async () => {
+		await User.deleteMany({
+			where: { email: { $not: ['admin@gmail.com'] } },
+		});
+	});
   it("should throw an error if the password value is empty", async () => {
     try {
      

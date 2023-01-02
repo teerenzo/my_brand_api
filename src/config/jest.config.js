@@ -8,3 +8,6 @@ module.exports = {
       '^.+\\.(ts|tsx)$': 'ts-jest',
   },
 };
+
+jest.setTimeout(30000)
+
