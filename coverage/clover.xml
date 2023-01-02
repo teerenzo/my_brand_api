@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1672644178890" clover="3.2.0">
-  <project timestamp="1672644178890" name="All files">
-    <metrics statements="200" coveredstatements="90" conditionals="32" coveredconditionals="2" methods="54" coveredmethods="6" elements="286" coveredelements="98" complexity="0" loc="200" ncloc="200" packages="7" files="15" classes="15"/>
+<coverage generated="1672644434832" clover="3.2.0">
+  <project timestamp="1672644434832" name="All files">
+    <metrics statements="201" coveredstatements="91" conditionals="36" coveredconditionals="4" methods="54" coveredmethods="6" elements="291" coveredelements="101" complexity="0" loc="201" ncloc="201" packages="7" files="15" classes="15"/>
     <package name="src">
-      <metrics statements="11" coveredstatements="11" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="2"/>
+      <metrics statements="12" coveredstatements="12" conditionals="6" coveredconditionals="3" methods="2" coveredmethods="2"/>
       <file name="app.js" path="/Users/andelarwanda/Documents/my_brand_api/src/app.js">
-        <metrics statements="11" coveredstatements="11" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="2"/>
+        <metrics statements="12" coveredstatements="12" conditionals="6" coveredconditionals="3" methods="2" coveredmethods="2"/>
         <line num="6" count="1" type="stmt"/>
         <line num="9" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="13" count="1" type="stmt"/>
-        <line num="14" count="1" type="stmt"/>
         <line num="15" count="1" type="stmt"/>
-        <line num="20" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
         <line num="22" count="1" type="stmt"/>
-        <line num="27" count="1" type="stmt"/>
-        <line num="29" count="1" type="stmt"/>
-        <line num="31" count="1" type="stmt"/>
-        <line num="36" count="1" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="42" count="1" type="stmt"/>
       </file>
     </package>
     <package name="src.config">

@@ -8,7 +8,9 @@ import { json } from 'express'
 import fileUploader from 'express-fileupload'
 const PORT = process.env.PORT || 5000;
 
+import dotenv from 'dotenv';
 
+dotenv.config();
 
 app.use(cors());
 app.use(json())
@@ -20,7 +22,11 @@ app.use(fileUploader({ useTempFiles: true }))
 app.use("/api", routes);
 
 mongoose
-  .connect("mongodb+srv://alain:kabebe22@cluster0.ax3p6.mongodb.net/my_brand_test?retryWrites=true&w=majority", {
+  .connect(process.env.NODE_ENV === 'production'
+  ? process.env.MONGO_PROD_URL
+  : process.env.NODE_ENV === 'test'
+  ? process.env.MONGO_TEST_URL
+  : process.env.MONGO_DEV_URL, {
     useNewUrlParser: true, useUnifiedTopology: true
   })
   .then(() => {
