@@ -12,8 +12,7 @@ exports.dbConnect = () => {
     : process.env.NODE_ENV === 'test'
     ? process.env.MONGO_TEST_URL
     : process.env.MONGO_DEV_URL, {
-
-      useNewUrlParser: true,
+      useNewUrlParser: true, useUnifiedTopology: true
     })
     .then(() => {console.log('Connected to DB')});
 };

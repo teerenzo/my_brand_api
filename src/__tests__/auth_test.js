@@ -8,6 +8,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+console.log('db url',process.env.MONGO_TEST_URL)
 
 chai.expect();
 chai.use(chaiHttp);

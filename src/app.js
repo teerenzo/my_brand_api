@@ -16,7 +16,7 @@ app.use(fileUploader({ useTempFiles: true }))
 
 app.use("/api", routes);
 
-app.listen(PORT, async ()  => {await dbConnect()
+app.listen(PORT, async()  => {await dbConnect()
 
   console.log("Server has started!");
 });
