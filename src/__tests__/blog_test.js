@@ -34,7 +34,7 @@ const tester = {
   };
 
 const admin={
-	email: 'admin@gmail.com',
+	email: 'admin1@gmail.com',
 	password: '123456'
 }
 
@@ -50,7 +50,7 @@ describe('Testing Blog routes', () => {
           });
 		await Article.deleteMany();
         // await User.deleteMany()
-        await chai.request(app).post('/api/account/signUp').send((tester));
+        // await chai.request(app).post('/api/account/signUp').send((tester));
 	}),
     beforeEach(async()=>{
          await chai.request(app).post('/api/account/signUp').send((tester));

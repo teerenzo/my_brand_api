@@ -27,7 +27,7 @@ exports.createNewArticle = async (req, res)  =>{
         User.findOne({
             _id:req.user.id
         }).then(async (result)=>{
-        console.log("get")
+      
      
         if(result.role.toString()=='admin')
         {

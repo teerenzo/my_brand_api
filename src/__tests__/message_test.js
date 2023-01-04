@@ -22,12 +22,12 @@ const testingMessage={
 }
 
 const admin={
-    email:'admin@gmail.com',
+    email:'admin2@gmail.com',
     password:'123456'
 }
 const tester = {
     username: 'James',
-      email: 'admin1@gmail.com',
+      email: 'admin2@gmail.com',
       password: '123456'
   
   };
