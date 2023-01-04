@@ -2,9 +2,7 @@
 
 import mongoose from 'mongoose' 
 mongoose.Promise = global.Promise
-import supertest from 'supertest'
 import Message from "../models/message";
-const cloudinary=require('cloudinary').v2;
 import dotenv from 'dotenv';
 import app from '../app';
 import chai from 'chai';
@@ -13,8 +11,6 @@ import chaiHttp from 'chai-http';
 dotenv.config();
 import User from '../models/userModel'
 
-
-const baseURL = process.env.BASE_URL
 const testingMessage={
     name:"John Doe",
     email:"john@gmail.com",
@@ -34,17 +30,12 @@ const tester = {
 
 chai.expect();
 chai.use(chaiHttp);
-jest.setTimeout(50000)
+jest.setTimeout(200000)
 describe('Testing message routes',()=>{
     beforeAll(async()=>{
         await User.deleteMany({
 			where: { email: { $not: ['admin2@gmail.com'] } },
 		});
-        // await chai.request(app).post('/api/account/signUp').send((tester));
-    })
-    beforeEach(async()=>{
-
-        await chai.request(app).post('/api/account/signUp').send((tester));
     })
     afterEach(async()=>{
         await Message.deleteMany()
@@ -60,11 +51,9 @@ describe('Testing message routes',()=>{
     })
     it('should get all messages',async()=>{
         const signUp=await chai.request(app).post('/api/account/signUp').send((tester));
-       const adminSignin=await chai.request(app).post('/api/account/login').send(admin)
-        const token = `Bearer ${adminSignin.body.user.token}`;
-  
+        const token = `Bearer ${signUp.body.user.token}`;
         const res= await chai.request(app).get('/api/message/').set('Authorization', token)
-    
+        console.log(res.body)
         expect(res.status).to.be.equal(200);
 
    

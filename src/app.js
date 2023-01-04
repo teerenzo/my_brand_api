@@ -5,6 +5,7 @@ import {dbConnect} from './config/db.config'
 const app = express();
 import { json } from 'express'
 import fileUploader from 'express-fileupload'
+const docsRouter=require('./api_documentation/index.doc');
 const PORT=process.env.PORT || 5000;
 
 
@@ -18,6 +19,8 @@ app.use(fileUploader({ useTempFiles: true }))
 
 
 app.use("/api", routes);
+app.use('/api/docs',docsRouter)
+
 
 if (process.env.NODE_ENV !== 'test') {
   app.listen(PORT);
