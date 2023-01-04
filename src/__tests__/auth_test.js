@@ -3,33 +3,37 @@ import { expect } from 'chai';
 import chaiHttp from 'chai-http';
 import User from '../models/userModel'
 
-const app =require('../app');
+import app from '../app';
 import dotenv from 'dotenv';
 
 dotenv.config();
 
 // console.log('db url',process.env.MONGO_TEST_URL)
 
-chai.expect();
-chai.use(chaiHttp);
+
 const tester = {
   username: 'James',
 	email: 'admin@gmail.com',
 	password: '123456'
 
 };
-// jest.setTimeout(30000)
+
+chai.expect();
+chai.use(chaiHttp);
+jest.setTimeout(50000)
 
 describe('Testing Auth routes', () => {
 
-  beforeAll(async () => {
-await User.deleteMany();
-});
 	beforeEach(async () => {
 		await User.deleteMany({
 			where: { email: { $not: ['admin@gmail.com'] } },
 		});
 	});
+
+  afterAll(async()=>{
+    User.deleteMany()
+  })
+
   it("should throw an error if the password value is empty", async () => {
     try {
      
@@ -57,7 +61,6 @@ await User.deleteMany();
   })
 	it('should register a user.', async () => {
 		const res = await chai.request(app).post('/api/account/signUp').send((tester));
-    console.log(res.body)
 		expect(res.status).to.be.equal(201);
     expect(res.body).to.be.a('object');
 	});

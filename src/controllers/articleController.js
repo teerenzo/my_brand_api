@@ -22,7 +22,6 @@ exports.getAllArticles = (req, res) => {
 };
 
 exports.createNewArticle = async (req, res)  =>{
-    // console.log(req.files)
     try {
         const valationResult = await articleSchema.validateAsync(req.body);
         User.findOne({
@@ -46,14 +45,14 @@ exports.createNewArticle = async (req, res)  =>{
         .then(result=>{
             res.json(result)
         })
-        .catch(error=>console.log(error+"hello11233"))
+        .catch(error=>console.log(error))
         }
         else
         {
             res.json({message:'User Not Authorized'}).status(401)
         }
     }).catch((er)=>{
-        res.status(500).json(er+"heyyyoo")
+        res.status(500).json()
     })
     }
     catch (err) {

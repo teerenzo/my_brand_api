@@ -19,19 +19,12 @@ const sendMessage = async (req,res)=>{
 }
 
 const getAllMessages=async (req,res)=>{
-    console.log(req.body['role'])
-    
-    // if(req.body['role'].toString()=='admin')
-    //     {
     Message.find()
     .then(messages=>{
         res.json({messages})
     })
     .catch(error=>res.json(error))
-// }else
-// {
-//     res.json({message:'User Not Authorized'}).status(401)
-// }
+
 
 }
 const deleteMessage=(req,res)=>{

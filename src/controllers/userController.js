@@ -26,7 +26,7 @@ const createNewUser= async(req,res)=>{
             username:user.username,
             email:user.email,
             role:user.role,
-            token:generateToken(user._id)
+            token:generateToken(user)
         }}))
         .catch(err=>console.log(err))
     }
@@ -60,7 +60,6 @@ const LoginUser=async (req,res)=>{
 
 
 
-// generate token 
 const generateToken=(id)=>{
     return jwt.sign({id},"my-token-secret",{expiresIn:'30d'})
 }
