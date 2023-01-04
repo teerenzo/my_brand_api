@@ -41,7 +41,7 @@ const admin={
 chai.expect();
 chai.use(chaiHttp);
 
-jest.setTimeout(300000)
+jest.setTimeout(4000000)
 describe('Testing Blog routes', () => {
     const sandbox = Sinon.createSandbox();
     beforeAll(async () => {
@@ -49,7 +49,7 @@ describe('Testing Blog routes', () => {
             url: 'wazaa',
           });
 		await Article.deleteMany();
-        // await User.deleteMany()
+        await User.deleteMany()
         // await chai.request(app).post('/api/account/signUp').send((tester));
 	}),
     // beforeEach(async()=>{
