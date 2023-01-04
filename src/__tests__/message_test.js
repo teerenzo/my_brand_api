@@ -37,7 +37,9 @@ chai.use(chaiHttp);
 jest.setTimeout(50000)
 describe('Testing message routes',()=>{
     beforeAll(async()=>{
-        await User.deleteMany()
+        await User.deleteMany({
+			where: { email: { $not: ['admin2@gmail.com'] } },
+		});
         // await chai.request(app).post('/api/account/signUp').send((tester));
     })
     beforeEach(async()=>{
@@ -57,6 +59,7 @@ describe('Testing message routes',()=>{
         expect(res.status).to.be.equal(200);
     })
     it('should get all messages',async()=>{
+        const signUp=await chai.request(app).post('/api/account/signUp').send((tester));
        const adminSignin=await chai.request(app).post('/api/account/login').send(admin)
         const token = `Bearer ${adminSignin.body.user.token}`;
   
