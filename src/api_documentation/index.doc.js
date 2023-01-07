@@ -2,9 +2,13 @@ const { Router } = require('express');
 const { serve, setup } = require('swagger-ui-express');
 
 const docrouter = Router();
+import dotenv from 'dotenv';
 
+dotenv.config();
 const local = process.env.LOCAL_HOST;
 const heroku = process.env.DB_CONNECT;
+
+
 
 
 const options = {
@@ -13,7 +17,7 @@ const options = {
     title: 'My Brand',
     version: '1.0.0',
     description:
-      'This is the backend api for my portfolio app.',
+      'My Protofolio Backend.',
   },
   host: process.env === 'production' ? heroku : local,
   basePath: '/api',
@@ -28,10 +32,10 @@ tags: [
       {name: 'Message', description: 'Messages'},
     ],
   paths: {
-    '/api/users/register': {
+    '/api/account/signUp': {
       post: {
         tags: ['Users'],
-        description: 'User register',
+        description: 'User SigUp',
         security: [],
         parameters: [],
         requestBody: {
@@ -62,7 +66,7 @@ tags: [
         },
       },
     },
-    '/api/users/login': {
+    '/api/account/login': {
         post: {
         tags: ['Users'],
         description: 'User login',
@@ -184,8 +188,8 @@ tags: [
       }, 
     }
   },
-  '/api/articles/update/{id}':{
-    patch:{
+  '/api/articles/{id}/update':{
+    put:{
       tags:['Blog'],
       description:'Update blog article',
       parameters: [
@@ -225,7 +229,7 @@ tags: [
       }, 
     }
   },
-  '/api/articles/delete/{id}':{
+  '/api/articles/{id}':{
     delete:{
       tags:['Blog'],
       description:'Delete blog article',
@@ -262,11 +266,17 @@ tags: [
       }, 
     }
   },
-  '/api/articles/comment/':{
+  '/api/articles/{article_id}/comment':{
     post:{
       tags:['Blog'],
       description:'Comment on article blog article',
-      parameters: [],
+      parameters: [
+        {
+          "in": "path",
+          "name": "article_id",
+           required: true,
+        }
+      ],
       requestBody: {
         content: {
           'application/json': {
@@ -274,7 +284,6 @@ tags: [
               $ref: '#/components/schemas/Blog',
             },
             example: {
-              article_id:"6251374247c7a6f93bdd52e7",
               comment:"that content is very helpful thanks"
             },
           },
@@ -297,20 +306,24 @@ tags: [
       }, 
     }
   },
-  '/api/articles/like/':{
+  '/api/articles/{article_id}/like':{
     post:{
       tags:['Blog'],
       description:'Like on article blog article',
-      parameters: [],
+      parameters: [  {
+        "in": "path",
+        "name": "article_id",
+         required: true,
+      }],
       requestBody: {
         content: {
           'application/json': {
             schema: {
               $ref: '#/components/schemas/Blog',
             },
-            example: {
-              article_id:"6251374247c7a6f93bdd52e7",
-            },
+            // example: {
+            //   article_id:"6251374247c7a6f93bdd52e7",
+            // },
           },
         },
         required: true,
@@ -331,7 +344,7 @@ tags: [
       }, 
     }
   },
-  '/api/message/send/':{
+  '/api/message/sendMessage/':{
     post:{
       tags:['Message'],
       security:[],
