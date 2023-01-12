@@ -6,6 +6,9 @@ const app = express();
 import { json } from 'express'
 import fileUploader from 'express-fileupload'
 const docsRouter=require('./api_documentation/index.doc');
+import dotenv from 'dotenv';
+
+dotenv.config();
 const PORT=process.env.PORT || 5000;
 
 

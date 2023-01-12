@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>9/9</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>9/9</span>
             </div>
         
             
@@ -529,16 +529,42 @@
 <a name='L464'></a><a href='#L464'>464</a>
 <a name='L465'></a><a href='#L465'>465</a>
 <a name='L466'></a><a href='#L466'>466</a>
-<a name='L467'></a><a href='#L467'>467</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">3x</span>
+<a name='L467'></a><a href='#L467'>467</a>
+<a name='L468'></a><a href='#L468'>468</a>
+<a name='L469'></a><a href='#L469'>469</a>
+<a name='L470'></a><a href='#L470'>470</a>
+<a name='L471'></a><a href='#L471'>471</a>
+<a name='L472'></a><a href='#L472'>472</a>
+<a name='L473'></a><a href='#L473'>473</a>
+<a name='L474'></a><a href='#L474'>474</a>
+<a name='L475'></a><a href='#L475'>475</a>
+<a name='L476'></a><a href='#L476'>476</a>
+<a name='L477'></a><a href='#L477'>477</a>
+<a name='L478'></a><a href='#L478'>478</a>
+<a name='L479'></a><a href='#L479'>479</a>
+<a name='L480'></a><a href='#L480'>480</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -999,9 +1025,13 @@
 const { serve, setup } = require('swagger-ui-express');
 &nbsp;
 const docrouter = Router();
+import dotenv from 'dotenv';
 &nbsp;
+dotenv.config();
 const local = process.env.LOCAL_HOST;
 const heroku = process.env.DB_CONNECT;
+&nbsp;
+&nbsp;
 &nbsp;
 &nbsp;
 const options = {
@@ -1010,7 +1040,7 @@ const options = {
     title: 'My Brand',
     version: '1.0.0',
     description:
-      'This is the backend api for my portfolio app.',
+      'My Protofolio Backend.',
   },
   host: process.env === 'production' ? <span class="branch-0 cbranch-no" title="branch not covered" >heroku </span>: local,
   basePath: '/api',
@@ -1025,10 +1055,10 @@ tags: [
       {name: 'Message', description: 'Messages'},
     ],
   paths: {
-    '/api/users/register': {
+    '/api/account/signUp': {
       post: {
         tags: ['Users'],
-        description: 'User register',
+        description: 'User SigUp',
         security: [],
         parameters: [],
         requestBody: {
@@ -1059,7 +1089,7 @@ tags: [
         },
       },
     },
-    '/api/users/login': {
+    '/api/account/login': {
         post: {
         tags: ['Users'],
         description: 'User login',
@@ -1181,8 +1211,8 @@ tags: [
       }, 
     }
   },
-  '/api/articles/update/{id}':{
-    patch:{
+  '/api/articles/{id}/update':{
+    put:{
       tags:['Blog'],
       description:'Update blog article',
       parameters: [
@@ -1222,7 +1252,7 @@ tags: [
       }, 
     }
   },
-  '/api/articles/delete/{id}':{
+  '/api/articles/{id}':{
     delete:{
       tags:['Blog'],
       description:'Delete blog article',
@@ -1259,11 +1289,17 @@ tags: [
       }, 
     }
   },
-  '/api/articles/comment/':{
+  '/api/articles/{article_id}/comment':{
     post:{
       tags:['Blog'],
       description:'Comment on article blog article',
-      parameters: [],
+      parameters: [
+        {
+          "in": "path",
+          "name": "article_id",
+           required: true,
+        }
+      ],
       requestBody: {
         content: {
           'application/json': {
@@ -1271,7 +1307,6 @@ tags: [
               $ref: '#/components/schemas/Blog',
             },
             example: {
-              article_id:"6251374247c7a6f93bdd52e7",
               comment:"that content is very helpful thanks"
             },
           },
@@ -1294,20 +1329,24 @@ tags: [
       }, 
     }
   },
-  '/api/articles/like/':{
+  '/api/articles/{article_id}/like':{
     post:{
       tags:['Blog'],
       description:'Like on article blog article',
-      parameters: [],
+      parameters: [  {
+        "in": "path",
+        "name": "article_id",
+         required: true,
+      }],
       requestBody: {
         content: {
           'application/json': {
             schema: {
               $ref: '#/components/schemas/Blog',
             },
-            example: {
-              article_id:"6251374247c7a6f93bdd52e7",
-            },
+            // example: {
+            //   article_id:"6251374247c7a6f93bdd52e7",
+            // },
           },
         },
         required: true,
@@ -1328,7 +1367,7 @@ tags: [
       }, 
     }
   },
-  '/api/message/send/':{
+  '/api/message/sendMessage/':{
     post:{
       tags:['Message'],
       security:[],
@@ -1468,7 +1507,7 @@ module.exports = docrouter;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-01-07T07:24:31.433Z
+                at 2023-01-11T18:45:06.028Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
