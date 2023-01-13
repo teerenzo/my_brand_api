@@ -21,9 +21,6 @@ app.use(fileUploader({ useTempFiles: true }))
 
 
 app.use("/api", routes);
-app.use("/", (req,res)=>{
-  res.sendFile(__dirname+"/welcome.html")
-});
 app.use('/api/docs',docsRouter)
 
 
